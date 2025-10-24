@@ -1,0 +1,467 @@
+# Comprehensive AI Agents for Data Mining and Analysis
+# Each agent is designed for specific data processing tasks
+
+agents:
+  # ============================================
+  # DATA QUALITY & VALIDATION AGENTS
+  # ============================================
+  
+  - id: data_validator
+    name: Data Quality Validator
+    provider: openai
+    model: gpt-4o-mini
+    temperature: 0.1
+    max_tokens: 512
+    prompt: |
+      You are a strict data quality validator. Analyze the data row and identify:
+      1. Missing required fields
+      2. Invalid data formats (emails, URLs, dates, numbers)
+      3. Suspicious or inconsistent values
+      4. Data completeness score (0-100)
+      
+      Row data: {{row_json}}
+      Required fields: {{required_fields_csv}}
+      
+      Return structured JSON: {"score": 0-100, "issues": [], "recommendations": [], "valid": true/false}
+
+  - id: completeness_scorer
+    name: Data Completeness Scorer
+    provider: openai
+    model: gpt-4o-mini
+    temperature: 0.1
+    max_tokens: 400
+    prompt: |
+      Score the completeness and quality of this data record:
+      - Completeness score (0-100): percentage of filled fields
+      - Quality score (0-100): data format correctness
+      - Missing critical information
+      - Specific suggestions for improvement
+      
+      Data: {{row_json}}
+      Required: {{required_fields_csv}}
+      
+      Format: JSON with scores and detailed breakdown.
+
+  - id: duplicate_detector
+    name: Duplicate & Similarity Detector
+    provider: openai
+    model: gpt-4o-mini
+    temperature: 0.2
+    max_tokens: 400
+    prompt: |
+      Analyze this record for potential duplicates or high similarity indicators:
+      - Key identifying fields
+      - Unique identifiers
+      - Potential duplicate risk (low/medium/high)
+      - Fields to check for deduplication
+      
+      Data: {{row_json}}
+
+  # ============================================
+  # BUSINESS INTELLIGENCE AGENTS
+  # ============================================
+
+  - id: company_enricher
+    name: Company Data Enricher
+    provider: gemini
+    model: gemini-2.0-flash-exp
+    temperature: 0.4
+    max_tokens: 800
+    prompt: |
+      Enrich this company data with intelligent business insights:
+      - Detailed industry classification and sub-sector
+      - Estimated market position and competitive landscape
+      - Growth indicators and business model characteristics
+      - Key strengths and potential challenges
+      - Strategic recommendations
+      
+      Company data: {{row_json}}
+      
+      Provide structured, actionable enrichment (200-300 words).
+
+  - id: market_analyzer
+    name: Market Position Analyzer
+    provider: grok
+    model: grok-beta
+    temperature: 0.3
+    max_tokens: 700
+    prompt: |
+      Analyze the market position and competitive landscape for this entity:
+      - Market segment and target audience
+      - Competitive advantages
+      - Market share estimates (if data available)
+      - Industry trends affecting this business
+      - Strategic positioning recommendations
+      
+      Data: {{row_json}}
+
+  - id: financial_analyst
+    name: Financial Health Analyzer
+    provider: openai
+    model: gpt-4o-mini
+    temperature: 0.2
+    max_tokens: 600
+    prompt: |
+      Analyze the financial indicators in this data:
+      - Revenue trends and patterns
+      - Financial health indicators
+      - Growth rate analysis
+      - Risk factors
+      - Investment considerations
+      
+      Data: {{row_json}}
+      
+      Be specific with numbers where available.
+
+  - id: business_model_identifier
+    name: Business Model Identifier
+    provider: gemini
+    model: gemini-2.0-flash-exp
+    temperature: 0.3
+    max_tokens: 500
+    prompt: |
+      Identify and analyze the business model:
+      - Primary business model type (B2B, B2C, SaaS, Marketplace, etc.)
+      - Revenue streams
+      - Value proposition
+      - Scalability assessment
+      - Innovation level
+      
+      Data: {{row_json}}
+
+  # ============================================
+  # SENTIMENT & CONTENT ANALYSIS AGENTS
+  # ============================================
+
+  - id: sentiment_analyzer
+    name: Content Sentiment Analyzer
+    provider: openai
+    model: gpt-4o-mini
+    temperature: 0.2
+    max_tokens: 400
+    prompt: |
+      Perform comprehensive sentiment analysis:
+      - Overall sentiment (positive/negative/neutral) with confidence %
+      - Emotional tone indicators
+      - Key sentiment drivers
+      - Tone characteristics (professional, casual, urgent, etc.)
+      - Sentiment trends (if temporal data available)
+      
+      Data: {{row_json}}
+
+  - id: content_summarizer
+    name: Content Summarizer
+    provider: gemini
+    model: gemini-2.0-flash-exp
+    temperature: 0.4
+    max_tokens: 600
+    prompt: |
+      Generate a concise, high-quality summary:
+      - Main points and key information (3-5 bullet points)
+      - Critical details that must not be missed
+      - Context and background
+      - Actionable insights
+      
+      Data: {{row_json}}
+      
+      Keep summary clear, professional, under 150 words.
+
+  - id: insight_extractor
+    name: Strategic Insights Extractor
+    provider: grok
+    model: grok-beta
+    temperature: 0.4
+    max_tokens: 600
+    prompt: |
+      Extract deep strategic insights from this data:
+      - Hidden patterns or correlations
+      - Non-obvious implications
+      - Strategic opportunities
+      - Potential challenges or risks
+      - Questions for further investigation
+      
+      Data: {{row_json}}
+      
+      Be analytical, thought-provoking, and actionable.
+
+  # ============================================
+  # CLASSIFICATION & CATEGORIZATION AGENTS
+  # ============================================
+
+  - id: category_classifier
+    name: Smart Category Classifier
+    provider: openai
+    model: gpt-4o-mini
+    temperature: 0.2
+    max_tokens: 400
+    prompt: |
+      Intelligently classify this data into relevant categories:
+      - Primary category (single, most relevant)
+      - Secondary categories (2-3 if applicable)
+      - Detailed tags for searchability (5-10 tags)
+      - Confidence level for each (0-100%)
+      - Classification rationale
+      
+      Data: {{row_json}}
+      
+      Return structured JSON format.
+
+  - id: industry_classifier
+    name: Industry & Sector Classifier
+    provider: gemini
+    model: gemini-2.0-flash-exp
+    temperature: 0.2
+    max_tokens: 400
+    prompt: |
+      Classify into industry categories:
+      - Primary industry (NAICS/SIC standard)
+      - Sub-industry / sector
+      - Related industries
+      - Industry trends relevance
+      - Classification confidence
+      
+      Data: {{row_json}}
+
+  - id: entity_extractor
+    name: Named Entity Extractor
+    provider: openai
+    model: gpt-4o-mini
+    temperature: 0.1
+    max_tokens: 500
+    prompt: |
+      Extract and categorize all named entities:
+      - Organizations/Companies
+      - People/Contacts
+      - Locations (cities, countries, regions)
+      - Products/Services
+      - Dates and temporal information
+      - Financial figures
+      - Technologies mentioned
+      
+      Data: {{row_json}}
+      
+      Return structured list with entity types.
+
+  # ============================================
+  # RISK & COMPLIANCE AGENTS
+  # ============================================
+
+  - id: risk_assessor
+    name: Comprehensive Risk Assessor
+    provider: grok
+    model: grok-beta
+    temperature: 0.3
+    max_tokens: 600
+    prompt: |
+      Perform comprehensive risk assessment:
+      - Financial risks (if applicable)
+      - Operational risks
+      - Compliance/regulatory concerns
+      - Reputational risks
+      - Overall risk level: Low/Medium/High/Critical
+      - Specific mitigation strategies
+      - Red flags that need immediate attention
+      
+      Data: {{row_json}}
+
+  - id: compliance_checker
+    name: Compliance & Regulatory Checker
+    provider: openai
+    model: gpt-4o-mini
+    temperature: 0.2
+    max_tokens: 500
+    prompt: |
+      Check for compliance and regulatory considerations:
+      - Data privacy compliance (GDPR, CCPA, etc.)
+      - Industry-specific regulations
+      - Required disclosures
+      - Compliance gaps
+      - Recommendations for compliance
+      
+      Data: {{row_json}}
+
+  - id: fraud_detector
+    name: Fraud & Anomaly Detector
+    provider: grok
+    model: grok-beta
+    temperature: 0.2
+    max_tokens: 500
+    prompt: |
+      Analyze for potential fraud indicators and anomalies:
+      - Suspicious patterns
+      - Data inconsistencies
+      - Red flags for fraud
+      - Anomaly severity (low/medium/high)
+      - Recommended verification steps
+      
+      Data: {{row_json}}
+      
+      Be thorough but avoid false positives.
+
+  # ============================================
+  # PATTERN RECOGNITION & ANALYTICS AGENTS
+  # ============================================
+
+  - id: pattern_detector
+    name: Pattern & Trend Detector
+    provider: gemini
+    model: gemini-2.0-flash-exp
+    temperature: 0.3
+    max_tokens: 600
+    prompt: |
+      Detect patterns, trends, and correlations:
+      - Temporal patterns (if dates present)
+      - Value patterns and distributions
+      - Correlations between fields
+      - Statistical outliers
+      - Trend directions (increasing/decreasing/stable)
+      - Pattern significance and implications
+      
+      Data: {{row_json}}
+
+  - id: trend_analyzer
+    name: Advanced Trend Analyzer
+    provider: grok
+    model: grok-beta
+    temperature: 0.3
+    max_tokens: 600
+    prompt: |
+      Perform advanced trend analysis:
+      - Historical trends (if temporal data available)
+      - Current state assessment
+      - Future trend projections
+      - Comparative trends vs. industry
+      - Momentum indicators
+      - Trend reversal signals
+      
+      Data: {{row_json}}
+
+  - id: correlation_finder
+    name: Correlation & Relationship Finder
+    provider: openai
+    model: gpt-4o-mini
+    temperature: 0.3
+    max_tokens: 500
+    prompt: |
+      Identify correlations and relationships in the data:
+      - Strong correlations between fields
+      - Causal relationships
+      - Unexpected connections
+      - Relationship strength (weak/moderate/strong)
+      - Implications of these relationships
+      
+      Data: {{row_json}}
+
+  # ============================================
+  # COMPETITIVE INTELLIGENCE AGENTS
+  # ============================================
+
+  - id: competitor_analyzer
+    name: Competitive Intelligence Analyzer
+    provider: gemini
+    model: gemini-2.0-flash-exp
+    temperature: 0.4
+    max_tokens: 700
+    prompt: |
+      Analyze competitive positioning and intelligence:
+      - Key competitors (direct and indirect)
+      - Competitive advantages and disadvantages
+      - Market differentiation
+      - Competitive threats
+      - Strategic positioning recommendations
+      
+      Data: {{row_json}}
+
+  - id: swot_analyzer
+    name: SWOT Analysis Generator
+    provider: grok
+    model: grok-beta
+    temperature: 0.3
+    max_tokens: 700
+    prompt: |
+      Generate comprehensive SWOT analysis:
+      - Strengths: internal positive attributes
+      - Weaknesses: internal limitations
+      - Opportunities: external favorable conditions
+      - Threats: external challenges
+      
+      Provide 3-5 items for each category with brief explanations.
+      
+      Data: {{row_json}}
+
+  # ============================================
+  # PREDICTIVE & FORECASTING AGENTS
+  # ============================================
+
+  - id: growth_predictor
+    name: Growth Potential Predictor
+    provider: gemini
+    model: gemini-2.0-flash-exp
+    temperature: 0.4
+    max_tokens: 600
+    prompt: |
+      Predict growth potential and trajectories:
+      - Growth potential score (0-100)
+      - Growth drivers and inhibitors
+      - Timeline projections (short/medium/long term)
+      - Growth scenarios (best/likely/worst case)
+      - Key assumptions
+      
+      Data: {{row_json}}
+
+  - id: opportunity_identifier
+    name: Opportunity Identifier
+    provider: grok
+    model: grok-beta
+    temperature: 0.4
+    max_tokens: 600
+    prompt: |
+      Identify opportunities for improvement, growth, or optimization:
+      - Immediate opportunities (quick wins)
+      - Strategic opportunities (long-term value)
+      - Market opportunities
+      - Operational efficiencies
+      - Priority ranking
+      
+      Data: {{row_json}}
+
+  # ============================================
+  # COMMUNICATION & REPORTING AGENTS
+  # ============================================
+
+  - id: executive_summary_generator
+    name: Executive Summary Generator
+    provider: gemini
+    model: gemini-2.0-flash-exp
+    temperature: 0.5
+    max_tokens: 700
+    prompt: |
+      Generate executive-level summary for leadership:
+      - Key highlights (top 3-5 points)
+      - Critical metrics and KPIs
+      - Strategic implications
+      - Recommended actions
+      - Bottom line / TL;DR
+      
+      Data: {{row_json}}
+      
+      Professional tone, 150-200 words, decision-focused.
+
+  - id: technical_report_generator
+    name: Technical Report Generator
+    provider: openai
+    model: gpt-4o-mini
+    temperature: 0.3
+    max_tokens: 800
+    prompt: |
+      Generate detailed technical report:
+      - Data overview and context
+      - Detailed analysis of each field
+      - Technical observations
+      - Methodology notes
+      - Data quality assessment
+      - Technical recommendations
+      
+      Data: {{row_json}}
+      
+      Thorough, technical, 300-400 words.
