@@ -400,7 +400,7 @@ with st.sidebar:
         )
         gemini_key = st.text_input(
             "Google AI API Key (Gemini)",
-            value=os.environ.get("GOOGLE_API_KEY", ""),
+            value=os.environ.get("GEMINI_API_KEY", ""),
             type="password"
         )
         grok_key = st.text_input(
@@ -415,7 +415,7 @@ with st.sidebar:
             if openai_key:
                 os.environ["OPENAI_API_KEY"] = openai_key
             if gemini_key:
-                os.environ["GOOGLE_API_KEY"] = gemini_key
+                os.environ["GEMINI_API_KEY"] = gemini_key
             if grok_key:
                 os.environ["XAI_API_KEY"] = grok_key
             st.success("✓ Keys applied successfully!")
@@ -865,7 +865,7 @@ with tab5:
   - id: company_enricher
     name: Company Data Enricher
     provider: gemini
-    model: gemini-2.0-flash-exp
+    model: gemini-2.5-flash
     temperature: 0.4
     max_tokens: 800
     prompt: |
@@ -899,7 +899,7 @@ with tab5:
   - id: pattern_detector
     name: Pattern & Anomaly Detector
     provider: grok
-    model: grok-beta
+    model: grok-3-mini
     temperature: 0.3
     max_tokens: 600
     prompt: |
@@ -916,7 +916,7 @@ with tab5:
   - id: summary_generator
     name: Executive Summary Generator
     provider: gemini
-    model: gemini-2.0-flash-exp
+    model: gemini-2.5-flash
     temperature: 0.5
     max_tokens: 700
     prompt: |
@@ -951,7 +951,7 @@ with tab5:
   - id: risk_assessor
     name: Risk Assessment Agent
     provider: grok
-    model: grok-beta
+    model: grok-3-mini
     temperature: 0.3
     max_tokens: 500
     prompt: |
@@ -966,7 +966,7 @@ with tab5:
   - id: insight_extractor
     name: Key Insights Extractor
     provider: gemini
-    model: gemini-2.0-flash-exp
+    model: gemini-2.5-flash
     temperature: 0.4
     max_tokens: 600
     prompt: |
@@ -999,7 +999,7 @@ with tab5:
   - id: trend_analyzer
     name: Trend Analysis Agent
     provider: grok
-    model: grok-beta
+    model: grok-3-mini
     temperature: 0.3
     max_tokens: 500
     prompt: |
