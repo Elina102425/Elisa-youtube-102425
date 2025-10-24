@@ -64,7 +64,7 @@ agents:
   - id: company_enricher
     name: Company Data Enricher
     provider: gemini
-    model: gemini-2.0-flash-exp
+    model: gemini-2.5-flash
     temperature: 0.4
     max_tokens: 800
     prompt: |
@@ -82,7 +82,7 @@ agents:
   - id: market_analyzer
     name: Market Position Analyzer
     provider: grok
-    model: grok-beta
+    model: grok-3-mini
     temperature: 0.3
     max_tokens: 700
     prompt: |
@@ -116,7 +116,7 @@ agents:
   - id: business_model_identifier
     name: Business Model Identifier
     provider: gemini
-    model: gemini-2.0-flash-exp
+    model: gemini-2.5-flash
     temperature: 0.3
     max_tokens: 500
     prompt: |
@@ -152,7 +152,7 @@ agents:
   - id: content_summarizer
     name: Content Summarizer
     provider: gemini
-    model: gemini-2.0-flash-exp
+    model: gemini-2.5-flash
     temperature: 0.4
     max_tokens: 600
     prompt: |
@@ -169,7 +169,7 @@ agents:
   - id: insight_extractor
     name: Strategic Insights Extractor
     provider: grok
-    model: grok-beta
+    model: grok-3-mini
     temperature: 0.4
     max_tokens: 600
     prompt: |
@@ -209,7 +209,7 @@ agents:
   - id: industry_classifier
     name: Industry & Sector Classifier
     provider: gemini
-    model: gemini-2.0-flash-exp
+    model: gemini-2.5-flash
     temperature: 0.2
     max_tokens: 400
     prompt: |
@@ -249,7 +249,7 @@ agents:
   - id: risk_assessor
     name: Comprehensive Risk Assessor
     provider: grok
-    model: grok-beta
+    model: grok-3-mini
     temperature: 0.3
     max_tokens: 600
     prompt: |
@@ -283,7 +283,7 @@ agents:
   - id: fraud_detector
     name: Fraud & Anomaly Detector
     provider: grok
-    model: grok-beta
+    model: grok-3-mini
     temperature: 0.2
     max_tokens: 500
     prompt: |
@@ -305,7 +305,7 @@ agents:
   - id: pattern_detector
     name: Pattern & Trend Detector
     provider: gemini
-    model: gemini-2.0-flash-exp
+    model: gemini-2.5-flash
     temperature: 0.3
     max_tokens: 600
     prompt: |
@@ -322,7 +322,7 @@ agents:
   - id: trend_analyzer
     name: Advanced Trend Analyzer
     provider: grok
-    model: grok-beta
+    model: grok-3-mini
     temperature: 0.3
     max_tokens: 600
     prompt: |
@@ -359,7 +359,7 @@ agents:
   - id: competitor_analyzer
     name: Competitive Intelligence Analyzer
     provider: gemini
-    model: gemini-2.0-flash-exp
+    model: gemini-2.5-flash
     temperature: 0.4
     max_tokens: 700
     prompt: |
@@ -375,7 +375,7 @@ agents:
   - id: swot_analyzer
     name: SWOT Analysis Generator
     provider: grok
-    model: grok-beta
+    model: grok-3-mini
     temperature: 0.3
     max_tokens: 700
     prompt: |
@@ -396,7 +396,7 @@ agents:
   - id: growth_predictor
     name: Growth Potential Predictor
     provider: gemini
-    model: gemini-2.0-flash-exp
+    model: gemini-2.5-flash
     temperature: 0.4
     max_tokens: 600
     prompt: |
@@ -412,7 +412,7 @@ agents:
   - id: opportunity_identifier
     name: Opportunity Identifier
     provider: grok
-    model: grok-beta
+    model: grok-3-mini
     temperature: 0.4
     max_tokens: 600
     prompt: |
@@ -432,7 +432,7 @@ agents:
   - id: executive_summary_generator
     name: Executive Summary Generator
     provider: gemini
-    model: gemini-2.0-flash-exp
+    model: gemini-2.5-flash
     temperature: 0.5
     max_tokens: 700
     prompt: |
